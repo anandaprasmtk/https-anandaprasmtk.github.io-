@@ -1,0 +1,294 @@
+/* =========================================
+   BASE & RESET
+========================================= */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;800&display=swap');
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Poppins', sans-serif;
+}
+
+body {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: #333;
+  min-height: 100vh;
+  overflow-x: hidden; 
+}
+
+.fade-in { animation: fadeIn 0.5s ease-in-out; }
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* =========================================
+   NAVBAR & HAMBURGER MENU
+========================================= */
+.navbar-modern {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 5%;
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+  color: white;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+}
+.logo { cursor: pointer; font-size: 24px; font-weight: 800; }
+.dot { color: #FFD54F; }
+
+/* Ikon Hamburger disembunyikan di layar Laptop */
+.hamburger {
+  display: none;
+  font-size: 28px;
+  cursor: pointer;
+  user-select: none;
+}
+
+.menu-modern { 
+  display: flex; 
+  list-style: none; 
+  gap: 20px; 
+  align-items: center; 
+}
+.menu-modern li { cursor: pointer; font-weight: 600; font-size: 15px; padding: 5px 10px; border-radius: 8px; transition: 0.3s; }
+.menu-modern li:hover, .menu-modern li.active { background: rgba(255, 255, 255, 0.2); color: #FFD54F; }
+.btn-logout { background-color: #e74c3c !important; color: white !important; }
+
+/* =========================================
+   LAYOUT UTAMA & LOGIN
+========================================= */
+.main-content { padding: 40px 5%; min-height: calc(100vh - 80px); display: flex; justify-content: center; align-items: flex-start; text-align: center; color: white; }
+.judul-besar { font-size: 2.5rem; margin-bottom: 20px; text-shadow: 2px 2px 4px rgba(0,0,0,0.3); }
+.btn-mulai { padding: 15px 30px; font-size: 16px; font-weight: bold; border: none; border-radius: 50px; background: #FFD54F; color: #333; cursor: pointer; transition: 0.3s; }
+
+.login-container { display: flex; justify-content: center; align-items: center; min-height: 100vh; width: 100%; padding: 20px; }
+.login-box { background: rgba(255, 255, 255, 0.95); padding: 30px; border-radius: 20px; box-shadow: 0 15px 35px rgba(0,0,0,0.2); width: 100%; max-width: 400px; color: #333; text-align: center; }
+.role-selector { display: flex; gap: 10px; margin: 20px 0; }
+.btn-role { flex: 1; padding: 10px; border: 2px solid #ddd; background: white; border-radius: 8px; font-weight: bold; cursor: pointer; }
+.btn-role.active { border-color: #667eea; background: #E8EAF6; color: #667eea; }
+.login-box form { display: flex; flex-direction: column; gap: 15px; }
+.login-box input { padding: 12px; border-radius: 10px; border: 2px solid #ddd; outline: none; }
+.btn-login { background: #667eea; color: white; padding: 12px; border: none; border-radius: 10px; font-weight: bold; cursor: pointer; }
+
+/* =========================================
+   E-BOOK MATERI & KUIS LATIHAN
+========================================= */
+.ebook-wrapper { display: flex; flex-direction: row; background: white; width: 100%; max-width: 1000px; border-radius: 15px; box-shadow: 0 20px 40px rgba(0,0,0,0.3); overflow: hidden; text-align: left; }
+.book-page { flex: 1; padding: 30px; display: flex; flex-direction: column; }
+.left-page { background: #fdfdfd; border-right: 2px dashed #d1d1d1; }
+.right-page { background: #fafafa; }
+.nama-bangun { color: #764ba2; font-size: 22px; border-bottom: 3px solid #FFD54F; padding-bottom: 10px; margin-bottom: 15px; }
+
+.buku-scroll { max-height: 550px; overflow-y: auto; padding-right: 10px; }
+.buku-scroll::-webkit-scrollbar { width: 6px; }
+.buku-scroll::-webkit-scrollbar-thumb { background: #FFD54F; border-radius: 10px; }
+
+.visual-area { background: #E1F5FE; padding: 20px; border-radius: 15px; text-align: center; margin-bottom: 20px; }
+.ikon-besar { font-size: 60px; }
+
+.konten-ebook h4 { color: #764ba2; margin: 15px 0 5px; font-size: 16px; border-left: 4px solid #FFD54F; padding-left: 10px; }
+.konten-ebook p { font-size: 14px; line-height: 1.6; color: #555; margin-bottom: 10px; white-space: pre-wrap; }
+.teks-rumus { background: #E8F5E9; padding: 12px; border-radius: 8px; font-family: monospace; font-size: 14px !important; color: #2E7D32 !important; border: 1px dashed #4CAF50; }
+.teks-contoh { background: #FFF8E1; padding: 12px; border-radius: 8px; border-left: 4px solid #FFC107; margin-bottom: 10px; }
+
+.judul-kalkulator { color: #4CAF50; margin-bottom: 10px; font-size: 20px; }
+.petunjuk-kalkulator { font-size: 13px; color: #888; margin-bottom: 15px; font-style: italic; }
+
+.opsi-latihan-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 20px; }
+.btn-opsi-latihan { padding: 12px; border: 2px solid #ddd; background: #f4f4f9; border-radius: 8px; font-weight: bold; cursor: pointer; }
+.btn-opsi-latihan.benar { background: #4CAF50 !important; color: white !important; border-color: #388E3C !important; }
+.btn-opsi-latihan.salah { background: #e74c3c !important; color: white !important; border-color: #c0392b !important; }
+
+.hasil-box { padding: 15px; border-radius: 8px; margin-top: 10px; }
+.box-hijau { background: #E8F5E9; border-left: 5px solid #4CAF50; color: #2E7D32; }
+.box-merah { background: #FFEBEE; border-left: 5px solid #e74c3c; color: #c0392b; }
+.btn-hitung { background: #667eea; color: white; padding: 12px; border: none; border-radius: 8px; font-weight: bold; cursor: pointer; width: 100%; }
+
+.book-navigation { display: flex; justify-content: space-between; align-items: center; width: 100%; max-width: 1000px; margin-top: 20px; background: rgba(255,255,255,0.2); padding: 15px; border-radius: 50px; }
+.btn-navigasi { background: #FFD54F; border: none; padding: 10px 20px; font-weight: bold; border-radius: 20px; cursor: pointer; }
+.indikator-halaman { font-weight: bold; }
+
+/* =========================================
+   GAME & EVALUASI AKHIR
+========================================= */
+.game-container { width: 100%; }
+.soal-card, .hasil-game { background: white; color: #333; padding: 30px; border-radius: 20px; max-width: 600px; margin: 0 auto; text-align: left;}
+.soal-teks { color: #888; font-weight: bold; margin-bottom: 10px; }
+.opsi-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-top: 20px; }
+.btn-opsi { padding: 12px; background: #f0f0f0; border: none; border-radius: 8px; font-weight: bold; cursor: pointer; transition: 0.2s; }
+.btn-opsi:hover { background: #667eea; color: white; }
+.skor-teks { font-size: 40px; font-weight: 800; display: block; margin: 10px 0;}
+
+.memory-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; max-width: 500px; margin: 20px auto; }
+.memory-card { aspect-ratio: 1/1; cursor: pointer; perspective: 1000px; }
+.memory-card-inner { position: relative; width: 100%; height: 100%; text-align: center; transition: transform 0.6s; transform-style: preserve-3d; }
+.memory-card.flipped .memory-card-inner { transform: rotateY(180deg); }
+.memory-card-front, .memory-card-back { position: absolute; width: 100%; height: 100%; backface-visibility: hidden; display: flex; align-items: center; justify-content: center; border-radius: 10px; box-shadow: 0 4px 8px rgba(0,0,0,0.2); }
+.memory-card-front { background: linear-gradient(135deg, #FFD54F, #F57C00); font-size: 2rem; color: white; }
+.memory-card-back { background: white; transform: rotateY(180deg); border: 2px solid #FFD54F; font-size: 1.5rem; font-weight: bold; color: #333; }
+
+/* =========================================
+   ADMIN TABS (Dashboard Guru)
+========================================= */
+.admin-tabs {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 25px;
+  flex-wrap: wrap;
+  border-bottom: 2px solid #eee;
+  padding-bottom: 15px;
+}
+.admin-tabs button {
+  padding: 10px 15px;
+  background: #f4f4f9;
+  border: none;
+  border-radius: 8px;
+  font-weight: bold;
+  color: #555;
+  cursor: pointer;
+  transition: 0.3s;
+}
+.admin-tabs button:hover, .admin-tabs button.active {
+  background: #667eea;
+  color: white;
+}
+.form-edit {
+  background: #fafafa;
+  padding: 20px;
+  border-radius: 15px;
+  border: 1px solid #ddd;
+}
+.soal-edit-card {
+  background: white;
+  padding: 15px;
+  border-radius: 10px;
+  margin-bottom: 15px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+}
+.soal-edit-card label {
+  font-weight: bold;
+  color: #764ba2;
+  display: block;
+  margin-bottom: 10px;
+}
+.soal-edit-card textarea {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  margin-bottom: 10px;
+  font-family: inherit;
+}
+
+/* =========================================
+   📱 KODE AJAIB RESPONSIVE (UNTUK HP)
+========================================= */
+@media screen and (max-width: 768px) {
+  .navbar-modern { 
+    flex-direction: row; /* Logo & Hamburger bersebelahan */
+    padding: 15px 20px; 
+  }
+  
+  .hamburger { 
+    display: block; /* Tampilkan Ikon Hamburger */
+  }
+
+  /* Desain Menu Dropdown */
+  .menu-modern { 
+    display: none; /* Sembunyikan menu bawaan */
+    flex-direction: column; 
+    position: absolute; 
+    top: 65px; /* Tepat di bawah navbar */
+    left: 0; 
+    width: 100%; 
+    background: #667eea; 
+    padding: 20px 0; 
+    box-shadow: 0 10px 20px rgba(0,0,0,0.3); 
+    border-bottom-left-radius: 15px;
+    border-bottom-right-radius: 15px;
+  }
+  
+  /* Menu akan muncul jika ada tambahan class .open */
+  .menu-modern.open {
+    display: flex;
+    animation: slideDown 0.3s ease-in-out;
+  }
+  
+  @keyframes slideDown {
+    from { opacity: 0; transform: translateY(-10px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .menu-modern li { 
+    width: 90%; 
+    text-align: center; 
+    padding: 12px;
+  }
+  
+  /* Layout lainnya untuk layar HP */
+  .ebook-wrapper { flex-direction: column; }
+  .left-page { border-right: none; border-bottom: 2px dashed #d1d1d1; }
+  .buku-scroll { max-height: none; overflow-y: visible; padding-right: 0;}
+  .opsi-latihan-grid, .opsi-grid { grid-template-columns: 1fr; }
+  .book-navigation { flex-direction: column; gap: 15px; border-radius: 20px; padding: 20px; }
+  .btn-navigasi { width: 100%; }
+  .judul-besar { font-size: 2rem; }
+  .memory-grid { grid-template-columns: repeat(3, 1fr); }
+  .memory-card-front, .memory-card-back { font-size: 1.2rem; }
+}
+
+/* =========================================
+   PROFIL TIM (3 MAHASISWA)
+========================================= */
+.profil-container { width: 100%; max-width: 1000px; margin: 0 auto; }
+.profil-grid { 
+  display: grid; 
+  grid-template-columns: repeat(3, 1fr); /* Tetap 3 Kolom Sejajar */
+  gap: 25px; 
+}
+.profil-card { 
+  background: white; 
+  padding: 30px 20px; 
+  border-radius: 20px; 
+  box-shadow: 0 10px 30px rgba(0,0,0,0.2); 
+  color: #333; 
+  display: flex; 
+  flex-direction: column; 
+  align-items: center; 
+  text-align: center; 
+  transition: transform 0.3s;
+}
+.profil-card:hover { transform: translateY(-10px); }
+
+.profil-img-placeholder { 
+  font-size: 70px; 
+  background: #E1F5FE; 
+  width: 130px; 
+  height: 130px; 
+  border-radius: 50%; 
+  display: flex; 
+  align-items: center; 
+  justify-content: center; 
+  margin-bottom: 15px; 
+  border: 4px solid #81D4FA; 
+}
+
+.nama-mhs { color: #764ba2; font-size: 20px; margin-bottom: 5px; }
+.tugas-mhs { font-size: 14px; color: #888; font-style: italic; margin-bottom: 20px; }
+
+.profil-info { 
+  background: #f4f4f9; 
+  width: 100%; 
+  padding: 12px; 
+  border-radius: 10px; 
+  font-size: 16px; 
+  font-weight: bold; 
+  color: #555; 
+  border: 2px dashed #ccc; 
+}
