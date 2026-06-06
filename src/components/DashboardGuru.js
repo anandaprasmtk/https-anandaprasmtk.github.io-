@@ -1,104 +1,118 @@
-// src/components/DashboardGuru.js
 import React, { useState } from 'react';
 
-// Menerima data dan fungsi pengubah dari App.js
-const DashboardGuru = ({ linkVidio, setLinkVidio, soalKuis, setSoalKuis }) => {
-  const [tabAktif, setTabAktif] = useState('murid'); // Default tab adalah data murid
+const DashboardGuru = ({ linkVidio, setLinkVidio, soalKuis, setSoalKuis, tujuan, setTujuan, dataSiswa }) => {
+  const [tabAktif, setTabAktif] = useState('murid');
   const [inputVidio, setInputVidio] = useState(linkVidio);
+  const [inputTujuan, setInputTujuan] = useState(tujuan);
 
-  const dataMurid = [
-    { id: 1, nama: "Andi Saputra", bacaMateri: "Selesai", mainGame: "Selesai", skorKuis: 100 },
-    { id: 2, nama: "Budi Santoso", bacaMateri: "Selesai", mainGame: "Selesai", skorKuis: 75 },
-    { id: 3, nama: "Citra Kirana", bacaMateri: "Sebagian", mainGame: "Belum", skorKuis: 50 }
-  ];
-
-  // Fungsi untuk menyimpan perubahan URL Vidio
-  const simpanVidio = () => {
-    setLinkVidio(inputVidio);
-    alert("Vidio berhasil diperbarui!");
+  const simpanVidio = () => { setLinkVidio(inputVidio); alert("Vidio diperbarui!"); };
+  const simpanTujuan = () => { setTujuan(inputTujuan); alert("Tujuan diperbarui!"); };
+  
+  const ubahTeksSoal = (index, teksBaru) => { 
+    const soalBaru = [...soalKuis]; soalBaru[index].soal = teksBaru; setSoalKuis(soalBaru); 
   };
 
-  // Fungsi untuk mengubah teks soal kuis spesifik
-  const ubahTeksSoal = (index, teksBaru) => {
+  const ubahOpsi = (soalIndex, opsiIndex, teksBaru) => {
     const soalBaru = [...soalKuis];
-    soalBaru[index].soal = teksBaru;
+    const opsiLama = soalBaru[soalIndex].opsi[opsiIndex];
+    soalBaru[soalIndex].opsi[opsiIndex] = teksBaru;
+    
+    if (soalBaru[soalIndex].jawaban === opsiLama) {
+      soalBaru[soalIndex].jawaban = teksBaru;
+    }
     setSoalKuis(soalBaru);
+  };
+
+  const ubahJawaban = (soalIndex, teksBaru) => {
+    const soalBaru = [...soalKuis]; soalBaru[soalIndex].jawaban = teksBaru; setSoalKuis(soalBaru);
+  };
+
+  const ubahPembahasan = (soalIndex, teksBaru) => {
+    const soalBaru = [...soalKuis]; soalBaru[soalIndex].pembahasan = teksBaru; setSoalKuis(soalBaru);
   };
 
   return (
     <div className="dashboard-container fade-in">
       <h2>👩‍🏫 Panel Admin Guru</h2>
-      
-      {/* Menu Tab Guru */}
       <div className="admin-tabs">
         <button className={tabAktif === 'murid' ? 'active' : ''} onClick={() => setTabAktif('murid')}>👥 Data Murid</button>
+        <button className={tabAktif === 'tujuan' ? 'active' : ''} onClick={() => setTabAktif('tujuan')}>🎯 Edit Tujuan</button>
         <button className={tabAktif === 'vidio' ? 'active' : ''} onClick={() => setTabAktif('vidio')}>🎥 Edit Vidio</button>
         <button className={tabAktif === 'kuis' ? 'active' : ''} onClick={() => setTabAktif('kuis')}>📝 Edit Kuis</button>
-        <button className={tabAktif === 'materi' ? 'active' : ''} onClick={() => setTabAktif('materi')}>📚 Edit Materi</button>
-        <button className={tabAktif === 'game' ? 'active' : ''} onClick={() => setTabAktif('game')}>🎮 Edit Game</button>
       </div>
 
       <div className="admin-content">
-        {/* --- TAB DATA MURID --- */}
         {tabAktif === 'murid' && (
           <div className="tabel-wrapper fade-in">
-            <h3>Perkembangan Belajar Siswa</h3>
             <table className="tabel-guru">
-              <thead><tr><th>Nama Siswa</th><th>Materi</th><th>Game</th><th>Skor Kuis</th></tr></thead>
+              <thead><tr><th>No & Nama</th><th>Materi</th><th>Game</th><th>Skor Kuis</th></tr></thead>
               <tbody>
-                {dataMurid.map((m) => (
-                  <tr key={m.id}>
-                    <td style={{fontWeight: 'bold', textAlign:'left'}}>{m.nama}</td>
-                    <td className={m.bacaMateri === 'Selesai' ? 'text-hijau' : 'text-merah'}>{m.bacaMateri}</td>
-                    <td className={m.mainGame === 'Selesai' ? 'text-hijau' : 'text-merah'}>{m.mainGame}</td>
-                    <td><span className={`badge-skor ${m.skorKuis >= 80 ? 'skor-tinggi' : m.skorKuis > 0 ? 'skor-sedang' : 'skor-nol'}`}>{m.skorKuis}</span></td>
-                  </tr>
-                ))}
+                {dataSiswa.length === 0 ? (
+                  <tr><td colSpan="4" style={{padding: '20px'}}>Belum ada awak kapal (siswa) yang mendaftar hari ini.</td></tr>
+                ) : (
+                  dataSiswa.map((siswa, index) => (
+                    <tr key={siswa.id}>
+                      <td style={{fontWeight: 'bold', textAlign:'left'}}>{index + 1}. {siswa.nama}</td>
+                      <td className={siswa.bacaMateri === 'Selesai' ? 'text-hijau' : 'text-merah'}>{siswa.bacaMateri}</td>
+                      <td className={siswa.mainGame === 'Selesai' ? 'text-hijau' : 'text-merah'}>{siswa.mainGame}</td>
+                      <td><span className={`badge-skor ${siswa.skorKuis >= 70 ? 'skor-tinggi' : siswa.skorKuis > 0 ? 'skor-sedang' : 'skor-nol'}`}>{siswa.skorKuis}</span></td>
+                    </tr>
+                  ))
+                )}
               </tbody>
             </table>
           </div>
         )}
 
-        {/* --- TAB EDIT VIDIO --- */}
+        {tabAktif === 'tujuan' && (
+          <div className="form-edit fade-in">
+            <h3>Edit Tujuan Pembelajaran</h3>
+            <p className="instruksi-edit">Teks ini akan muncul sebagai Pop-up murid saat login.</p>
+            <textarea value={inputTujuan} onChange={(e) => setInputTujuan(e.target.value)} rows="5" />
+            <button className="btn-hitung" onClick={simpanTujuan}>Simpan Tujuan</button>
+          </div>
+        )}
+
         {tabAktif === 'vidio' && (
           <div className="form-edit fade-in">
-            <h3>Ganti Vidio Pembelajaran</h3>
-            <p style={{marginBottom: '10px', color: '#555'}}>Masukkan URL *Embed* Youtube terbaru di sini:</p>
-            <input 
-              type="text" 
-              value={inputVidio} 
-              onChange={(e) => setInputVidio(e.target.value)} 
-              style={{width: '100%', padding: '10px', marginBottom: '15px'}}
-            />
+            <h3>Ganti Vidio Youtube</h3>
+            <input type="text" value={inputVidio} onChange={(e) => setInputVidio(e.target.value)} />
             <button className="btn-hitung" onClick={simpanVidio}>Simpan Vidio</button>
           </div>
         )}
 
-        {/* --- TAB EDIT KUIS --- */}
         {tabAktif === 'kuis' && (
           <div className="form-edit fade-in">
-            <h3>Daftar Soal Kuis Murid</h3>
+            <h3>Edit Daftar Soal, Opsi, dan Pembahasan</h3>
             {soalKuis.map((item, index) => (
               <div key={index} className="soal-edit-card">
-                <label>Soal Nomor {index + 1}:</label>
-                <textarea 
-                  value={item.soal} 
-                  onChange={(e) => ubahTeksSoal(index, e.target.value)}
-                  rows="3"
-                />
-                <p><strong>Jawaban Benar:</strong> {item.jawaban}</p>
+                <label>📝 Soal {index + 1}:</label>
+                <textarea value={item.soal} onChange={(e) => ubahTeksSoal(index, e.target.value)} rows="3" />
+
+                <label className="label-biru">Pilihan Ganda (Opsi):</label>
+                <div className="opsi-edit-grid">
+                  {item.opsi.map((ops, oIdx) => (
+                    <input 
+                      key={oIdx} type="text" value={ops} 
+                      onChange={(e) => ubahOpsi(index, oIdx, e.target.value)} 
+                      placeholder={`Opsi ${oIdx + 1}`} 
+                    />
+                  ))}
+                </div>
+
+                <label className="label-hijau">✅ Kunci Jawaban Benar:</label>
+                <select value={item.jawaban} onChange={(e) => ubahJawaban(index, e.target.value)}>
+                  <option value="" disabled>Pilih Kunci Jawaban</option>
+                  {item.opsi.map((ops, oIdx) => (
+                    <option key={oIdx} value={ops}>{ops}</option>
+                  ))}
+                </select>
+
+                <label className="label-oranye">💡 Pembahasan / Analisis Kesalahan:</label>
+                <textarea value={item.pembahasan} onChange={(e) => ubahPembahasan(index, e.target.value)} rows="3" />
               </div>
             ))}
-            <button className="btn-hitung" onClick={() => alert("Soal kuis tersimpan otomatis!")}>Simpan Semua Soal</button>
-          </div>
-        )}
-
-        {/* --- TAB MATERI & GAME (Placeholder untuk pengembangan selanjutnya) --- */}
-        {(tabAktif === 'materi' || tabAktif === 'game') && (
-          <div className="form-edit fade-in" style={{textAlign: 'center', padding: '40px 0'}}>
-            <span style={{fontSize: '50px'}}>🚧</span>
-            <h3>Fitur Sedang Dalam Pengembangan</h3>
-            <p>Fitur untuk mengubah {tabAktif} secara dinamis membutuhkan struktur database (Backend) yang lebih kompleks. Nantikan pembaruan versi 2.0!</p>
+            <button className="btn-hitung" onClick={() => alert("Perubahan pada soal berhasil disimpan!")}>Simpan Semua Perubahan</button>
           </div>
         )}
       </div>
