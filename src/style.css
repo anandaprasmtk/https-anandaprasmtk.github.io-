@@ -339,39 +339,48 @@ img, iframe, video { max-width: 100%; height: auto; }
 }
 
 /* =========================================
-   PERBAIKAN RESPONSIVE TABEL DATA MURID
+   PERBAIKAN RESPONSIVE DASHBOARD GURU & TABEL
 ========================================= */
 
-/* 1. Membuat bungkus tabel yang bisa digeser ke samping */
+/* 1. KUNCI KOTAK PUTIH: Agar tidak pernah melebar melebihi layar HP */
+.dashboard-container {
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
+  overflow: hidden; /* Memotong elemen nakal yang mencoba keluar dari kotak */
+}
+
+.admin-content {
+  width: 100%;
+  max-width: 100%;
+}
+
+/* 2. BUNGKUS TABEL: Paksa hanya bagian ini yang bisa di-scroll ke samping */
 .tabel-wrapper {
   width: 100%;
-  overflow-x: auto; /* Ini sihir utamanya: memunculkan scroll horizontal jika mentok */
-  -webkit-overflow-scrolling: touch; /* Membuat geseran jari di HP (iPhone/Android) sangat mulus */
-  border-radius: 15px;
-  border: 2px solid #e2e8f0;
-  background: white;
-  box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+  max-width: 100%;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  display: block; /* Sangat penting agar scroll horizontal bekerja mandiri */
+  border: 1px solid #e2e8f0;
+  border-radius: 10px;
 }
 
-/* 2. Memaksa tabel tetap lebar agar isinya tidak hancur berhimpitan */
-.tabel-guru {
-  width: 100%;
-  min-width: 650px; /* Rahasia: Memaksa lebar tabel minimal 650px. Jika layar HP cuma 400px, sisanya bisa di-scroll! */
-  border-collapse: collapse;
-}
+/* 3. ATURAN KHUSUS UNTUK LAYAR HP (Mobile) */
+@media screen and (max-width: 768px) {
+  .dashboard-container {
+    padding: 15px; /* Jarak pinggir kotak putih dikecilkan agar hemat tempat di HP */
+    border-radius: 15px;
+  }
 
-.tabel-guru th, .tabel-guru td {
-  padding: 15px;
-  border-bottom: 1px solid #e2e8f0;
-  text-align: center;
-  font-size: 15px;
-  white-space: nowrap; /* Mencegah teks turun ke baris baru dan membuat tabel memanjang jelek */
-}
+  .tabel-guru {
+    width: 100%;
+    min-width: 500px; /* Tabel dipaksa memanjang di dalam bungkusnya agar tidak hancur */
+  }
 
-/* 3. Penyesuaian khusus untuk layar HP super kecil */
-@media screen and (max-width: 480px) {
   .tabel-guru th, .tabel-guru td {
-    padding: 12px 10px;
-    font-size: 13px; /* Mengecilkan teks sedikit agar lebih pas di HP */
+    padding: 10px; /* Jarak antar teks dirapatkan */
+    font-size: 12px; /* Ukuran huruf sedikit dikecilkan khusus di HP */
+    white-space: nowrap; /* Mencegah teks turun ke bawah */
   }
 }
