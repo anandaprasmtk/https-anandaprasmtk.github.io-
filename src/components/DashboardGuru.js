@@ -42,10 +42,18 @@ const DashboardGuru = ({ linkVidio, setLinkVidio, soalKuis, setSoalKuis, tujuan,
       </div>
 
       <div className="admin-content">
+        {/* Tab Data Murid */}
         {tabAktif === 'murid' && (
-          <div className="tabel-wrapper fade-in">
+          <div className="tabel-wrapper fade-in">  {/* BUNGKUSAN INI SANGAT PENTING */}
             <table className="tabel-guru">
-              <thead><tr><th>No & Nama</th><th>Materi</th><th>Game</th><th>Skor Kuis</th></tr></thead>
+              <thead>
+                <tr>
+                  <th>No & Nama</th>
+                  <th>Materi</th>
+                  <th>Game</th>
+                  <th>Skor Kuis</th>
+                </tr>
+              </thead>
               <tbody>
                 {dataSiswa.length === 0 ? (
                   <tr><td colSpan="4" style={{padding: '20px'}}>Belum ada awak kapal (siswa) yang mendaftar hari ini.</td></tr>

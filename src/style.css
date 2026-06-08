@@ -337,3 +337,41 @@ img, iframe, video { max-width: 100%; height: auto; }
   .ebook-wrapper { width: 95%; }
   .dashboard-container { padding: 30px; width: 95%; }
 }
+
+/* =========================================
+   PERBAIKAN RESPONSIVE TABEL DATA MURID
+========================================= */
+
+/* 1. Membuat bungkus tabel yang bisa digeser ke samping */
+.tabel-wrapper {
+  width: 100%;
+  overflow-x: auto; /* Ini sihir utamanya: memunculkan scroll horizontal jika mentok */
+  -webkit-overflow-scrolling: touch; /* Membuat geseran jari di HP (iPhone/Android) sangat mulus */
+  border-radius: 15px;
+  border: 2px solid #e2e8f0;
+  background: white;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+}
+
+/* 2. Memaksa tabel tetap lebar agar isinya tidak hancur berhimpitan */
+.tabel-guru {
+  width: 100%;
+  min-width: 650px; /* Rahasia: Memaksa lebar tabel minimal 650px. Jika layar HP cuma 400px, sisanya bisa di-scroll! */
+  border-collapse: collapse;
+}
+
+.tabel-guru th, .tabel-guru td {
+  padding: 15px;
+  border-bottom: 1px solid #e2e8f0;
+  text-align: center;
+  font-size: 15px;
+  white-space: nowrap; /* Mencegah teks turun ke baris baru dan membuat tabel memanjang jelek */
+}
+
+/* 3. Penyesuaian khusus untuk layar HP super kecil */
+@media screen and (max-width: 480px) {
+  .tabel-guru th, .tabel-guru td {
+    padding: 12px 10px;
+    font-size: 13px; /* Mengecilkan teks sedikit agar lebih pas di HP */
+  }
+}
