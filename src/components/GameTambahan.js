@@ -17,7 +17,7 @@ const GameTambahan = () => {
     { 
       id: 2, 
       title: "Game Quiz", 
-      url: "https://html5games.com/Game/2048/2048", 
+      url: "https://app.quizwhizzer.com/play?", 
       icon: "🕹️", 
       desc: "Mainkan game asah otak seru langsung dari website ini.",
       bukaDiTabBaru: false // Game biasa tetap di dalam web
